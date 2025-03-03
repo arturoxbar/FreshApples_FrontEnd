@@ -1,0 +1,35 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+  :root {
+    // Primary Palette
+    --primary-color: #E50914; // Rojo Netflix para impacto
+    --primary-light: #FF4C4C;
+    --primary-dark: #A70000;
+
+    // Secondary Palette
+    --secondary-color: #FFD700; // Dorado para destacar
+    --secondary-light: #FFEA70;
+    --secondary-dark: #C7A600;
+
+    // Tertiary Palette
+    --tertiary-color: #1A1A40; // Azul oscuro cinematográfico
+    --tertiary-light: #3A3A70;
+    --tertiary-dark: #0D0D20;
+
+    // Backgrounds & Text
+    --background-color: #121212; // Oscuro para modo cine
+    --background-light: #1E1E1E;
+    --text-color: white;
+    --text-muted: #B3B3B3;
+
+    // Alerts & Feedback
+    --success-color: #28A745; // Verde éxito
+    --warning-color: #FFC107; // Amarillo advertencia
+    --error-color: #DC3545; // Rojo error
+    --info-color: #17A2B8; // Azul informativo
+
+    // Borders & Inputs
+    --input-border-color: rgba(255, 255, 255, 0.2);
+    --overlay-color: rgba(0, 0, 0, 0.5);
+  }

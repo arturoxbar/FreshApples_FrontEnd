@@ -1,0 +1,58 @@
+// styles.scss
+@import '../../../theme/variables.scss';
+
+ion-content {
+  --background: linear-gradient(132deg, rgb(253, 0, 0) 0%, rgba(63,63,63,1) 25%, rgba(29,29,29,1) 50%, rgba(0,0,0,1) 100%) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+form {
+  background: var(--overlay-color);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  color: var(--text-color);
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--input-border-color);
+  color: var(--text-color);
+}
+
+ion-label, ion-input {
+  color: var(--text-color);
+}
+
+.button-style {
+  margin-top: 1rem;
+  --background: var(--primary-color);
+  --color: var(--text-color);
+  font-weight: bold;
+}
+
+.login-style ion-button {
+  font-size: 0.9rem;
+  --color: var(--secondary-color);
+}
+
+.alert-success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.alert-warning {
+  background-color: var(--warning-color);
+  color: black;
+}
+
+.alert-error {
+  background-color: var(--error-color);
+  color: white;
+}
+
