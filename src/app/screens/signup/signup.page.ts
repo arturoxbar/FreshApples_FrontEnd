@@ -1,15 +1,15 @@
+import { ParseSourceFile } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { UserService } from 'src/app/services/user.service';
 
 interface User {
-  name: string;
-  lastname: string;
   username: string;
   email: string;
   password: string;
   repeat_password: string;
-  profilePicture: string;
 }
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -17,31 +17,81 @@ interface User {
   standalone: false
 })
 export class SignupPage {
-
-  ngOnInit() {
-  }
-
   newUser: User = {
-    name: '',
-    lastname: '',
     username: '',
     email: '',
     password: '',
-    repeat_password: '',
-    profilePicture: 'imagen.png'
+    repeat_password: ''
   };
+
+  loading = false;
+  validationError = '';
 
   constructor(
     private alert: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private userService: UserService
   ) { }
 
   async signup() {
 
-    console.log('Datos de registro:', this.newUser);
-    //await this.showAlert('Éxito', 'Registro completado correctamente');
-    this.resetForm();
-    this.navigateToLogin();
+    if (!this.validateForm()) {
+      return;
+    }
+
+    this.loading = true;
+    this.validationError = '';
+
+    try {
+      await this.userService.createUser(this.newUser).subscribe({
+        next: async (response) => {
+          await this.showAlert('Success', 'User successfully created');
+          this.resetForm();
+          this.navCtrl.navigateForward('/login');
+        },
+        error: async (error) => {
+          console.log("error service", error)
+          const errorMessage = error.error?.message || 'Unknow error';
+          await this.showAlert('Error', errorMessage);
+        }
+      });
+    } catch (error) {
+      await this.showAlert('Error', 'Unknow error2');
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  private validateForm() {
+    if (!this.newUser.username ||
+      !this.newUser.email ||
+      !this.newUser.password ||
+      !this.newUser.repeat_password) {
+      this.validationError = 'All the fields are required';
+      this.showAlert('Error', this.validationError);
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.newUser.email)) {
+      this.validationError = 'Invalid Email';
+      this.showAlert('Error', this.validationError);
+      return false;
+    }
+
+    if (this.newUser.password !== this.newUser.repeat_password) {
+      this.validationError = "The passwords doesn't match";
+      this.showAlert('Error', this.validationError);
+      return false;
+    }
+
+    if (this.newUser.password.length < 6) {
+      this.validationError = 'The password must have at least 6 digits long';
+      this.showAlert('Error', this.validationError);
+      return false;
+    }
+
+    return true;
   }
 
   private async showAlert(header: string, message: string) {
@@ -55,18 +105,10 @@ export class SignupPage {
 
   private resetForm() {
     this.newUser = {
-      name: '',
-      lastname: '',
       username: '',
       email: '',
       password: '',
       repeat_password: '',
-      profilePicture: 'imagen.png'
     };
   }
-
-  private navigateToLogin() {
-    this.navCtrl.navigateForward('/login');
-  }
-
 }
