@@ -2,6 +2,8 @@ import { ParseSourceFile } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { UserService, ExistingUserInterface } from 'src/app/services/user.service';
+import { Preferences } from '@capacitor/preferences';
+
 
 @Component({
   selector: 'app-login',
@@ -27,7 +29,16 @@ export class LoginPage implements OnInit {
     private userService: UserService
   ) { }
 
-  ngOnInit() {
+  async checkSession() {
+    const token = await Preferences.get({ key: 'token' });
+    console.log(token.value);
+    if (token.value) {
+      console.log("tiene sesion");
+    }
+  }
+
+  async ngOnInit() {
+    await this.checkSession()
   }
 
   private validateForm() {
@@ -65,10 +76,13 @@ export class LoginPage implements OnInit {
     try {
       console.log(this.existingUser)
       await this.userService.loginUser(this.existingUser).subscribe({
-        next: async (response) => {
+        next: async (response: any) => {
           await this.showAlert('Success', 'User Successfully log in')
           this.resetForm()
-          console.log(response)
+          await Preferences.set({
+            key: 'token',
+            value: response.token,
+          });
         },
         error: async (error) => {
           console.log("error service", error)
