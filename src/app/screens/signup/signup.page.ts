@@ -1,7 +1,8 @@
 import { ParseSourceFile } from '@angular/compiler';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
+import { Preferences } from '@capacitor/preferences';
 
 interface User {
   username: string;
@@ -16,7 +17,7 @@ interface User {
   styleUrls: ['./signup.page.scss'],
   standalone: false
 })
-export class SignupPage {
+export class SignupPage implements OnInit {
   newUser: User = {
     username: '',
     email: '',
@@ -32,6 +33,18 @@ export class SignupPage {
     private navCtrl: NavController,
     private userService: UserService
   ) { }
+
+  async checkSession() {
+    const token = await Preferences.get({ key: 'token' });
+    console.log(token.value);
+    if (token.value) {
+      console.log("tiene sesion");
+    }
+  }
+
+  async ngOnInit() {
+    await this.checkSession()
+  }
 
   async signup() {
 
