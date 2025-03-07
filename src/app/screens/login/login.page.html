@@ -7,6 +7,7 @@
 <ion-content [fullscreen]="true">
   <div class="container">
     <div class="header-style">Welcome Back</div>
+
     <form (submit)="login()">
       <ion-item>
         <ion-input
@@ -22,12 +23,22 @@
       <ion-item>
         <ion-input
           [(ngModel)]="existingUser.password"
-          type="password"
+          label="Password"
           name="password"
-          label="password"
           placeholder="Enter your password"
           labelPlacement="floating"
+          [type]="showPassword ? 'text' : 'password'"
         ></ion-input>
+        <ion-button
+          fill="clear"
+          slot="end"
+          (click)="togglePasswordVisibility()"
+        >
+          <ion-icon
+            class="custom-icon"
+            [name]="showPassword ? 'eye-off' : 'eye'"
+          ></ion-icon>
+        </ion-button>
       </ion-item>
 
       <ion-button expand="block" class="button-style" type="submit"
@@ -37,9 +48,30 @@
 
     <div class="sign-up-style">
       Don't have an account?
-      <ion-button fill="clear" routerLink="/signup" routerDirection="forward"
-        >Sign Up</ion-button
+      <ion-button fill="clear" routerLink="/signup" routerDirection="forward">
+        Sign Up
+      </ion-button>
+    </div>
+
+    <!-- <div class="sign-up-style">
+      <ion-button
+        fill="clear"
+        routerLink="/verification"
+        routerDirection="forward"
       >
+        Verification
+      </ion-button>
+    </div> -->
+
+    <div class="sign-up-style">
+      <ion-button
+        fill="clear"
+        routerLink="/sendverification"
+        routerDirection="forward"
+        expand="block"
+      >
+        I forgot my password
+      </ion-button>
     </div>
   </div>
 </ion-content>
