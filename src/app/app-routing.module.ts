@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./screens/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'verification',
+    loadChildren: () => import('./screens/verification/verification.module').then( m => m.VerificationPageModule)
   }
 
 
