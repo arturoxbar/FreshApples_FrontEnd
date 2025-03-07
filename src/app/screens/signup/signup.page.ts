@@ -60,6 +60,7 @@ export class SignupPage implements OnInit {
         next: async (response) => {
           await this.showAlert('Success', 'User successfully created');
           this.resetForm();
+          await Preferences.set({ key: "validateEmail", value: this.newUser.email })
           this.navCtrl.navigateForward('/login');
         },
         error: async (error) => {
