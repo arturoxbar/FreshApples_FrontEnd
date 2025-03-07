@@ -1,0 +1,65 @@
+@import '../../../theme/variables.scss';
+
+/* Centrar el contenido y establecer el fondo */
+.verification-content {
+  --background: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Estilos para la tarjeta de verificación */
+.verification-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background: var(--background-light);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+ion-input {
+  color: var(--text-color);
+}
+
+.input-style {
+  background-color: black;
+  font-size: 26px;
+  color: white;
+  text-align: center;          // Centra el texto
+  border: 2px solid var(--primary-color);  // Borde con el color primario
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;           // Espaciado y centrado
+  width: 80%;                  // Ajusta el ancho según necesites
+}
+
+/* Título del header */
+.header-title {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Espaciado y estilos para el botón Verify */
+.verify-button {
+  --background: var(--primary-color);
+  --color: var(--text-color);
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-top: 1rem;
+}
+.button-style {
+  --background: var(--primary-color);
+  --color: var(--text-color);
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+/* Opcional: ajustar estilos de ion-item e ion-input si se requiere */
+ion-item {
+  --background: transparent;
+  margin-bottom: 1rem;
+}
