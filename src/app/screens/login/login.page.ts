@@ -93,6 +93,7 @@ export class LoginPage implements OnInit {
         error: async (error) => {
           if (error.status === 401) {
             await Preferences.set({ key: "validateInfo", value: this.existingUser.userInfo })
+            await Preferences.set({ key: 'verificationMode', value: 'verify' });
             this.navCtrl.navigateForward('/verification');
           }
           const errorMessage = error.error?.message || 'Unknow error';
