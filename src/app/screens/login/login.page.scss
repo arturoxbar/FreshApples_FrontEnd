@@ -9,8 +9,6 @@ ion-content {
   text-align: center;
 }
 
-
-
 .container {
   max-width: 400px;
   width: 100%;
@@ -47,13 +45,16 @@ ion-input {
   margin-top: 1rem;
 }
 
-.sign-up-style {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
+.custom-icon {
+  color: white; /* Cambia el color del icono */
+  font-size: 24px; /* Opcional: Cambia el tamaño del icono */
 }
 
-.sign-up-style ion-button {
-  font-size: 0.9rem;
+.ion-modal::part(backdrop) {
+  background-color: rgba(255, 0, 0, 0.5); /* Fondo rojo con 50% de opacidad */
+}
+
+.login-style ion-button {
+
   --color: var(--secondary-color);
 }
