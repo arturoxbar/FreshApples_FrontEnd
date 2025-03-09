@@ -16,7 +16,8 @@ export interface ExistingUserInterface {
 const ENDPOINTS = {
   CREATE: "/api/v1/users/signup",
   LOGIN: "/api/v1/users/login",
-  VALIDATE: "/api/v1/users/user"
+  VALIDATE: "/api/v1/users/user",
+  FORGOT1: "/api/v1/users/password/reset"
 }
 
 @Injectable()
@@ -45,8 +46,15 @@ export class UserService {
   }
 
   validateUser(userInfo: string, code: string) {
-    const url = `${this.baseUrl}${ENDPOINTS.VALIDATE}${userInfo}/${code}`;
-    return this.http.patch(url, code).pipe(
+    const url = `${this.baseUrl}${ENDPOINTS.VALIDATE}/${code}`;
+    return this.http.patch(url, { userInfo }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  sendResetPassword(userEmail: string) {
+    const url = `${this.baseUrl}${ENDPOINTS.FORGOT1}`;
+    return this.http.post(url, { email: userEmail }).pipe(
       catchError(this.handleError)
     )
   }
