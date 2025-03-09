@@ -58,10 +58,10 @@ export class SignupPage implements OnInit {
     try {
       await this.userService.createUser(this.newUser).subscribe({
         next: async (response) => {
-          await this.showAlert('Success', 'User successfully created');
+          await this.showAlert('Success', 'User successfully created, now check your email for your verification code.');
+          await Preferences.set({ key: "validateInfo", value: this.newUser.email })
           this.resetForm();
-          await Preferences.set({ key: "validateEmail", value: this.newUser.email })
-          this.navCtrl.navigateForward('/login');
+          this.navCtrl.navigateForward('/verification');
         },
         error: async (error) => {
           console.log("error service", error)
