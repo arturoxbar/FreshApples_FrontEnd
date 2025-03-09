@@ -17,7 +17,8 @@ const ENDPOINTS = {
   CREATE: "/api/v1/users/signup",
   LOGIN: "/api/v1/users/login",
   VALIDATE: "/api/v1/users/user",
-  FORGOT1: "/api/v1/users/password/reset"
+  FORGOT1: "/api/v1/users/password/reset",
+  RESETPASSWORD: "/api/v1/users/password/reset"
 }
 
 @Injectable()
@@ -58,4 +59,16 @@ export class UserService {
       catchError(this.handleError)
     )
   }
+
+  verifyResetCode(userInfo: string, code: string) {
+    const url = `${this.baseUrl}${ENDPOINTS.FORGOT1}/${code}`;
+    return this.http.post(url, { userInfo }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  resetPassword() { }
+
+
+
 }
