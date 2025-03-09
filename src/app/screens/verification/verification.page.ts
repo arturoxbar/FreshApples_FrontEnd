@@ -12,7 +12,7 @@ import { Preferences } from '@capacitor/preferences';
 export class VerificationPage implements OnInit {
 
   code = "";
-  userInfo: string = "";
+  userInfo = "";
 
   constructor(
     private alert: AlertController,
@@ -32,12 +32,12 @@ export class VerificationPage implements OnInit {
     this.code = "";
   }
 
-  async checkSession() {
+  async checkUserInfo() {
     const tokenResult = await Preferences.get({ key: 'token' });
-    const emailResult = await Preferences.get({ key: "validateEmail" });
-    this.userInfo = emailResult.value || "";
+    const infoResult = await Preferences.get({ key: 'validateInfo' });
+    this.userInfo = infoResult.value || 'nullnose';
 
-    console.log(tokenResult.value);
+    console.log(this.userInfo);
     if (tokenResult.value) {
       console.log("tiene sesion");
     }
@@ -57,8 +57,8 @@ export class VerificationPage implements OnInit {
       return;
     }
     try {
-      // Se llama al método validateUser con el código ingresado y la información del usuario.
-      const result = await this.userService.validateUser(this.code.toUpperCase(), this.userInfo).subscribe({
+      console.log(this.userInfo);
+      const result = await this.userService.validateUser(this.userInfo, this.code.toUpperCase()).subscribe({
         next: async (response) => {
           await this.showAlert("Success", "Verification successful. You can now Login with your account");
           this.resetForm();
@@ -77,6 +77,8 @@ export class VerificationPage implements OnInit {
   }
 
   async ngOnInit() {
-    await this.checkSession();
+    await this.checkUserInfo();
   }
 }
+
+
