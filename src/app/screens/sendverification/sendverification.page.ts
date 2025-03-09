@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
-
+import { Preferences } from '@capacitor/preferences';
 @Component({
   selector: 'app-sendverification',
   templateUrl: './sendverification.page.html',
@@ -49,6 +49,7 @@ export class SendverificationPage implements OnInit {
       await this.userService.sendResetPassword(this.email).subscribe({
         next: async () => {
           await this.showAlert('Success', 'Reset code sent to your email');
+          await Preferences.set({ key: 'verificationMode', value: 'reset' });
           this.navCtrl.navigateForward('/verification');
         },
         error: async (error) => {
