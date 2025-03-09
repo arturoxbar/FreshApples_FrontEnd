@@ -22,13 +22,17 @@
     <ion-card-content>
       <form (submit)="validate()">
         <ion-input
+          name="code"
           fill="outline"
           placeholder="Enter code"
           class="input-style"
           [(ngModel)]="code"
         ></ion-input>
-        <ion-button expand="full" class="button-style">Verify</ion-button>
+        <ion-button expand="full" class="button-style" type="submit"
+          >Verify</ion-button
+        >
       </form>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
