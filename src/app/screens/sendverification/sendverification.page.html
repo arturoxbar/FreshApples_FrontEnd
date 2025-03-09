@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-row class="ion-align-items-end">
+      <ion-col size="2">
+        <ion-button fill="clear" routerLink="/login" routerDirection="back">
+          <ion-icon size="large" color="danger" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Reset Password</ion-card-title>
+      <ion-card-subtitle>
+        Enter your email to receive a verification code
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form (submit)="sendResetCode()">
+        <ion-input
+          name="email"
+          fill="outline"
+          label="Email"
+          labelPlacement="stacked"
+          type="email"
+          placeholder="Enter your email"
+          [(ngModel)]="email"
+          class="input-style"
+        ></ion-input>
+
+        <ion-button
+          expand="full"
+          class="button-style"
+          type="submit"
+          [disabled]="isLoading"
+        >
+          {{ isLoading ? 'Sending...' : 'Send Code' }}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
