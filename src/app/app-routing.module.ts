@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'verification',
     loadChildren: () => import('./screens/verification/verification.module').then( m => m.VerificationPageModule)
+  },
+  {
+    path: 'sendverification',
+    loadChildren: () => import('./screens/sendverification/sendverification.module').then( m => m.SendverificationPageModule)
   }
 
 
