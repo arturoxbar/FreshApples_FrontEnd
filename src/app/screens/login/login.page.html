@@ -41,8 +41,13 @@
         </ion-button>
       </ion-item>
 
-      <ion-button expand="block" class="button-style" type="submit"
-        >Log In</ion-button
+      <ion-button
+        expand="block"
+        class="button-style"
+        type="submit"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Sending...' : 'Login' }}</ion-button
       >
     </form>
 
@@ -52,16 +57,6 @@
         Sign Up
       </ion-button>
     </div>
-
-    <!-- <div class="sign-up-style">
-      <ion-button
-        fill="clear"
-        routerLink="/verification"
-        routerDirection="forward"
-      >
-        Verification
-      </ion-button>
-    </div> -->
 
     <div class="login-style">
       <ion-button
@@ -75,3 +70,4 @@
     </div>
   </div>
 </ion-content>
+
