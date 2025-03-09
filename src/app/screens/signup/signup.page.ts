@@ -60,6 +60,7 @@ export class SignupPage implements OnInit {
         next: async (response) => {
           await this.showAlert('Success', 'User successfully created, now check your email for your verification code.');
           await Preferences.set({ key: "validateInfo", value: this.newUser.email })
+          await Preferences.set({ key: 'verificationMode', value: 'verify' });
           this.resetForm();
           this.navCtrl.navigateForward('/verification');
         },
