@@ -14,16 +14,17 @@ export interface ExistingUserInterface {
 }
 
 const ENDPOINTS = {
-  CREATE: "/api/v1/users/signup",
-  LOGIN: "/api/v1/users/login",
-  VALIDATE: "/api/v1/users/user",
-  FORGOT1: "/api/v1/users/password/reset",
-  RESETPASSWORD: "/api/v1/users/password/reset"
+  CREATE: "/signup",
+  LOGIN: "/login",
+  VALIDATE: "/user",
+  FORGOT1: "/password/reset",
+  RESETPASSWORD: "/password/reset"
 }
 
 @Injectable()
 export class UserService {
-  private baseUrl = 'http://localhost:7338';
+  private baseUrl = 'http://localhost:7338/';
+  private prefix = 'api/v1/users'
 
   constructor(private http: HttpClient) { }
 
@@ -33,42 +34,43 @@ export class UserService {
   }
 
   createUser(newUser: UserInterface) {
-    const url = `${this.baseUrl}${ENDPOINTS.CREATE}`;
+    const url = `${this.baseUrl}${this.prefix}${ENDPOINTS.CREATE}`;
     return this.http.post(url, newUser).pipe(
       catchError(this.handleError)
     );
   }
 
   loginUser(existingUser: ExistingUserInterface) {
-    const url = `${this.baseUrl}${ENDPOINTS.LOGIN}`;
+    const url = `${this.baseUrl}${this.prefix}${ENDPOINTS.LOGIN}`;
     return this.http.post(url, existingUser).pipe(
       catchError(this.handleError)
     );
   }
 
   validateUser(userInfo: string, code: string) {
-    const url = `${this.baseUrl}${ENDPOINTS.VALIDATE}/${code}`;
+    const url = `${this.baseUrl}${this.prefix}${ENDPOINTS.VALIDATE}/${code}`;
     return this.http.patch(url, { userInfo }).pipe(
       catchError(this.handleError)
     )
   }
 
   sendResetPassword(userEmail: string) {
-    const url = `${this.baseUrl}${ENDPOINTS.FORGOT1}`;
+    const url = `${this.baseUrl}${this.prefix}${ENDPOINTS.FORGOT1}`;
     return this.http.post(url, { email: userEmail }).pipe(
       catchError(this.handleError)
     )
   }
 
   verifyResetCode(userInfo: string, code: string) {
-    const url = `${this.baseUrl}${ENDPOINTS.FORGOT1}/${code}`;
+    const url = `${this.baseUrl}${this.prefix}${ENDPOINTS.FORGOT1}/${code}`;
     return this.http.post(url, { userInfo }).pipe(
       catchError(this.handleError)
     );
   }
 
-  resetPassword() { }
-
-
+  resetPassword(userInfo: string, newPassword: string) {
+    const url = `${this.baseUrl}${this.prefix}${ENDPOINTS.RESETPASSWORD}`;
+    return this.http.patch(url, { userInfo, newPassword }).pipe(catchError(this.handleError))
+  }
 
 }
