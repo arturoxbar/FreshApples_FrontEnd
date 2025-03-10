@@ -26,7 +26,11 @@ const routes: Routes = [
   {
     path: 'sendverification',
     loadChildren: () => import('./screens/sendverification/sendverification.module').then( m => m.SendverificationPageModule)
-  }
+  },
+   {
+    path: 'changepassword',
+    loadChildren: () => import('./screens/changepassword/changepassword.module').then( m => m.ChangepasswordPageModule)
+  },
 
 
 ];
