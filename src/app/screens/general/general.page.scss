@@ -1,0 +1,93 @@
+@import '../../../theme/variables.scss';
+
+/* Header */
+.header-custom {
+  background: var(--tertiary-color);
+}
+
+.miniAvatar {
+  height: 30px;
+  width: 30px;
+
+}
+
+.centerheader-col {
+  text-align: center;
+}
+
+.centerheader {
+  padding: 0.5rem;
+  max-height: 40px;
+}
+
+/* Ion Content */
+.content-custom {
+  --background: var(--background-color);
+}
+
+/* Contenedor principal */
+.discover-container {
+  padding: 1rem;
+  color: var(--text-color);
+}
+
+/* Sección Titles */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* Botones y segment */
+.S_cart {
+  background: var(--background-light);
+  border: 1px solid var(--input-border-color);
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.S_frontpage {
+  border-radius: 5px;
+  width: 100px;
+  height: auto;
+}
+
+.S_page {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  --indicator-color: transparent; /* Oculta el indicador */
+}
+
+/* Media Card */
+ion-card {
+  margin-bottom: 1rem;
+  background: var(--background-light);
+  color: var(--text-color);
+}
+
+.media-img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.media-chip {
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.media-title {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.media-overview {
+  font-size: 0.8rem;
+}
+
+ion-segment-button.md {
+
+  --color-checked: transparent;
+
+}

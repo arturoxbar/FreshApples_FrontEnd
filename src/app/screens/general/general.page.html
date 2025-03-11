@@ -1,0 +1,132 @@
+<ion-header collapse="fade" class="header-custom">
+  <ion-toolbar>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="2" class="header">
+          <ion-avatar class="miniAvatar" routerLink="/user" routerDirection="forward">
+            <ion-img
+              src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            ></ion-img>
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="8" class="header centerheader-col">
+          <img
+            class="centerheader"
+            src="../../assets/img/logo_VV_blanco_mini.png"
+            alt="Logo"
+          />
+        </ion-col>
+        <ion-col size="2" class="header"><ion-button size="small" fill="clear" routerLink="/search" routerDirection="forward"><ion-icon color="danger" name="search"></ion-icon></ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+    <div *ngIf="!isloading">
+      <ion-progress-bar type="indeterminate" color="primary"></ion-progress-bar>
+    </div>
+    <div *ngIf="isloading">
+      <ion-progress-bar
+        type="indeterminate"
+        style="display: none"
+      ></ion-progress-bar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf="!isloading">
+  <ion-backdrop [visible]="true"></ion-backdrop>
+</div>
+<div *ngIf="isloading">
+  <ion-backdrop [visible]="false" style="display: none"></ion-backdrop>
+</div>
+
+<ion-content class="content-custom">
+  <div class="discover-container">
+    <ion-refresher
+      slot="fixed"
+      [pullFactor]="0.5"
+      [pullMin]="100"
+      [pullMax]="200"
+      (ionRefresh)="handleRefresh($event)"
+    >
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <!-- Sección: Popular Series -->
+
+      <ion-label class="section-title">POPULAR SERIES</ion-label>
+
+
+    <ion-segment scrollable class="no-indicator" value="disabled">
+      <ion-segment-button *ngFor="let serie of series" class="S_cart">
+        <ion-img
+          class="S_frontpage"
+          [src]="serie.poster"
+          alt="Serie Poster"
+        ></ion-img>
+        <ion-label>
+          <p class="S_page">{{ serie.name }}</p>
+        </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Sección: Popular Movies -->
+
+      <ion-label class="section-title">POPULAR MOVIES</ion-label>
+
+
+    <ion-segment scrollable>
+      <ion-segment-button
+        *ngFor="let movie of movies"
+        class="S_cart ion-activatable ripple-parent"
+      >
+        <ion-img
+          class="S_frontpage"
+          [src]="movie.poster"
+          alt="Movie Poster"
+        ></ion-img>
+        <ion-label>
+          <p class="S_page">{{ movie.title }}</p>
+        </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Sección: New & Updates -->
+    <ion-list>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-toolbar>
+            <ion-label class="section-title">NEW & UPDATES</ion-label>
+          </ion-toolbar>
+          <ion-col size="auto" class="P_cart ion-activatable ripple-parent">
+            <ion-card
+              routerLink="/movie-detail" routerDirection="forward"
+              *ngFor="let media of medias"
+              class="ion-activatable ripple-parent"
+            >
+              <img alt="media image" [src]="media.poster" class="media-img" />
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="auto">
+                    <ion-chip class="media-chip"> {{ media.type }} </ion-chip>
+                  </ion-col>
+                  <ion-col size="auto" class="media-title">
+                    {{ media.title || media.name }}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-card-content class="media-overview">
+                {{ media.overview }}
+              </ion-card-content>
+              <ion-ripple-effect></ion-ripple-effect>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>
