@@ -39,6 +39,7 @@ export class SignupPage implements OnInit {
     console.log(token.value);
     if (token.value) {
       console.log("tiene sesion");
+      this.navCtrl.navigateForward("/general");
     }
   }
 
