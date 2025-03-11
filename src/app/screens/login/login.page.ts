@@ -40,6 +40,7 @@ export class LoginPage implements OnInit {
     console.log(token.value);
     if (token.value) {
       console.log("tiene sesion");
+      this.navCtrl.navigateForward("/general");
     }
   }
 
@@ -83,12 +84,19 @@ export class LoginPage implements OnInit {
       console.log(this.existingUser)
       await this.userService.loginUser(this.existingUser).subscribe({
         next: async (response: any) => {
+          console.log(response.user._id)
           await this.showAlert('Success', 'User Successfully log in')
           this.resetForm()
           await Preferences.set({
             key: 'token',
             value: response.token,
           });
+          await Preferences.set({
+            key: "userId",
+            value: response.user._id,
+          })
+          console.log(response.token)
+          this.navCtrl.navigateForward("/general")
         },
         error: async (error) => {
           if (error.status === 401) {
