@@ -31,6 +31,14 @@ const routes: Routes = [
     path: 'changepassword',
     loadChildren: () => import('./screens/changepassword/changepassword.module').then( m => m.ChangepasswordPageModule)
   },
+  {
+    path: 'general',
+    loadChildren: () => import('./screens/general/general.module').then( m => m.GeneralPageModule)
+  },
+  {
+    path: 'movie-detail',
+    loadChildren: () => import('./screens/movie-detail/movie-detail.module').then( m => m.MovieDetailPageModule)
+  },
 
 
 ];
