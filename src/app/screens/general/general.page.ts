@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController, InfiniteScrollCustomEvent } from '@ionic/angular';
-
-
+import { MoviesService } from 'src/app/services/movies.service';
+import { Preferences } from '@capacitor/preferences';
 @Component({
   selector: 'app-general',
   templateUrl: './general.page.html',
@@ -14,59 +14,153 @@ export class GeneralPage implements OnInit {
   medias: any[] = [];
   popularMedia: any;
   trendingMedia: any;
-  hasSession: boolean = false;
   isloading: boolean = false;
+  selectedFilter: string = 'all'; // Filtro seleccionado (all, movies, series)
+  filteredMedias: any[] = []; // Medias filtradas
+
+  slideOpts = {
+    slidesPerView: 2.5,
+    spaceBetween: 10,
+    loop: false,
+  };
+
 
   constructor(
     private navCtrl: NavController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public MovieService: MoviesService
   ) { }
+
+
 
   async ngOnInit() {
 
-    // Datos estáticos para populares
-    this.popularMedia = {
-      series: [
-        { idApi: 1, poster: 'https://i.etsystatic.com/37268737/r/il/a9224f/5742583791/il_fullxfull.5742583791_pp96.jpg', name: 'Serie 1' },
-        { idApi: 2, poster: 'https://static.displate.com/857x1200/displate/2024-03-26/d917dfbcadcfa54bde60a393632280f9_49c081450ad6946305670ad42ff29722.jpg', name: 'Serie 2' }
-      ],
-      movies: [
-        { idApi: 101, poster: 'https://yc.cldmlk.com/1ybrsw78h5m7ztd0h9ssfehs48/uploads/vertical_813d59a7-32cd-4ca2-8499-bb334963a1c0.jpg', title: 'Película 1' },
-        { idApi: 102, poster: 'https://m.media-amazon.com/images/M/MV5BNDQwYWMxMDktZjUwMi00MzE5LTljNTUtZjIzNmNhZTc1ZGJlXkEyXkFqcGc@._V1_.jpg', title: 'Película 2' }
-      ]
-    };
+    this.loadData()
 
-    // Datos estáticos para tendencias
-    this.trendingMedia = [
-      { idApi: 201, poster: 'https://yc.cldmlk.com/1ybrsw78h5m7ztd0h9ssfehs48/uploads/vertical_813d59a7-32cd-4ca2-8499-bb334963a1c0.jpg', title: 'Media 1', type: 'movie', overview: 'Descripción de Media 1' },
-      { idApi: 202, poster: 'https://m.media-amazon.com/images/M/MV5BNDQwYWMxMDktZjUwMi00MzE5LTljNTUtZjIzNmNhZTc1ZGJlXkEyXkFqcGc@._V1_.jpg', name: 'Media 2', type: 'tv', overview: 'Descripción de Media 2' }
-    ];
-
-    // Asigna los datos a los arrays que usa la vista
-    this.series = [...this.popularMedia.series];
-    this.movies = [...this.popularMedia.movies];
-    this.medias = [...this.trendingMedia];
-
-    // Simula un retraso de carga
     setTimeout(() => {
       this.isloading = true;
     }, 1500);
   }
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  async handleRefresh(event: any) {
-    // Simula una refrescada de datos estáticos
-    setTimeout(() => {
+
+  private checkLoadingStatus() {
+    // Solo oculta el loading cuando ambas peticiones terminan
+    if (this.popularMedia && this.trendingMedia) {
       this.isloading = false;
+    }
+  }
 
-      // Reasigna los datos (en este caso se usan los mismos)
-      this.series = [...this.popularMedia.series];
-      this.movies = [...this.popularMedia.movies];
-      this.medias = [...this.trendingMedia];
+  // Carga datos iniciales
+  private loadData() {
+    this.isloading = true;
 
-      this.isloading = true;
-      event.target.complete();
-    }, 2000);
+    // Popular Media
+    this.MovieService.popularMedias().subscribe({
+      next: (popularData: any) => {
+        this.popularMedia = popularData;
+        this.series = [...this.popularMedia.series];
+        this.movies = [...this.popularMedia.movies];
+        this.checkLoadingStatus();
+      },
+      error: (error: any) => this.handleDataError(error)
+    });
+
+    // Trending Media
+    this.MovieService.trendingMedias().subscribe({
+      next: (trendingData: any) => {
+        console.log('Trending Data:', trendingData); // Depuración
+
+        // Combina movies y series en un solo array
+        this.trendingMedia = [...trendingData.movies, ...trendingData.series];
+        this.medias = [...this.trendingMedia]; // Asigna el array combinado
+        this.filteredMedias = [...this.medias]; // Inicializa filteredMedias con todos los datos
+
+        this.checkLoadingStatus();
+      },
+      error: (error: any) => this.handleDataError(error)
+    });
+  }
+
+
+  public applyFilter(event: Event) {
+    if (this.selectedFilter === 'movies') {
+      // Filtra solo películas
+      this.filteredMedias = this.medias.filter(media => media.type === 'movie');
+    } else if (this.selectedFilter === 'series') {
+      this.filteredMedias = this.medias.filter(media => media.type === 'tv');
+    } else {
+      // Muestra todo
+      this.filteredMedias = [...this.medias];
+    }
+    event.stopPropagation();
+  }
+
+  public setFilter(type: any) {
+    if (type) {
+      this.filteredMedias = this.medias.filter(media => media.type === type);
+    }
+    this.filteredMedias = [...this.medias]
+  }
+
+  public truncateText(text: string, maxLength: number): string {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  }
+
+  private handleDataError(error: any) {
+    this.isloading = false;
+    this.presentToast('Error cargando contenido');
+  }
+
+  async handleRefresh(event: any) {
+    this.MovieService.trendingMedias().subscribe({
+      next: (trendingData: any) => {
+
+        this.trendingMedia = [...trendingData.movies, ...trendingData.series];
+        this.medias = [...this.trendingMedia];
+        this.filteredMedias = [...this.medias];
+        //this.applyFilter();
+      },
+      complete: () => event.target.complete()
+    });
+  }
+
+  async goToMovie(id: number) {
+    console.log("test")
+    await Preferences.set({ key: "movie", value: id.toString() });
+
+    this.navCtrl.navigateForward("/movie-detail");
+  }
+
+  async goToSerie(id: number) {
+    await Preferences.set({ key: "serie", value: id.toString() });
+    this.navCtrl.navigateForward("/serie-detail");
+  }
+
+  async goToMedia(id: number, type: string) {
+    if (type === 'movie') {
+      await this.goToMovie(id);
+      return;
+    }
+    if (type === 'tv') {
+      await this.goToSerie(id);
+      return;
+    }
+  }
+
+  test() {
+    console.log("test")
+  }
+
+  private async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    await toast.present();
   }
 
   private generateItems() {
@@ -75,21 +169,24 @@ export class GeneralPage implements OnInit {
     for (let i = 0; i < 8; i++) {
       this.series.push(`Item ${count + i}`);
       this.movies.push(`Item ${count + i}`);
-
     }
     for (let i = 0; i < 8; i++) {
       this.medias.push(`Item ${count0 + i}`);
     }
   }
-  //controla el scroll
+
+  // Controla el scroll
   onIonInfinite(ev: Event) {
     this.generateItems();
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 500);
   }
-
-
-  
-
 }
+
+
+
+
+
+
+
