@@ -1,0 +1,49 @@
+
+ion-card {
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  background: var(--background-light);
+  color: var(--text-color);
+}
+
+.collum2{
+    padding: 1.3rem;
+
+  }
+  .collum{
+    padding: 1rem;
+    text-align: center;
+    align-items: center;
+  }
+
+  .custom-avatar {
+    width: 150px;
+    height: 150px;
+  }
+
+.input_data{
+  padding: 1.3rem;
+}
+
+.change_data{
+  padding: 1.3rem;
+}
+
+.sign-up-style {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.exit_btn{
+  text-align: center;
+}
+
+.custom-text{
+  color: red;
+}
+
+.custom-icon {
+  color: white; /* Cambia el color del icono */
+  font-size: 24px; /* Opcional: Cambia el tamaño del icono */
+}

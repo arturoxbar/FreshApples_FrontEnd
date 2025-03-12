@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-row class="ion-align-items-end">
+      <ion-col size="2">
+              <ion-button fill="clear" routerLink="/general" routerDirection="forward"><ion-icon size="large" color="danger" name="arrow-back" ></ion-icon></ion-button>
+      </ion-col>
+      <ion-col size="8" class="collum2"><ion-title>User</ion-title></ion-col>
+      <ion-col size="2"><ion-button fill="clear" shape="round" size="default" shape="round"><ion-icon class="custom-icon" slot="icon-only" name="exit"></ion-icon></ion-button></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+      
+      <ion-card>
+        <ion-card-header>
+
+          <ion-grid [fixed]="true" >
+            <ion-row class="ion-justify-content-center">
+              <ion-col  size="auto">
+                <ion-avatar  class="custom-avatar" >
+                    <img  alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-header>
+      
+        <ion-card-content>
+              <ion-input class="input_data" label="User Name" color="danger" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+             
+             
+         
+                <br />
+                <ion-input class="input_data" label="E-mail" color="danger" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+            
+                <br />
+                <ion-input class="input_data" label="Password" color="danger" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+           
+
+        </ion-card-content>
+        <ion-card-content class="change_data"  >
+          <ion-button expand="full" color="success" shape="round">change data</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+
+      <ion-grid>
+        <ion-row size="12" >
+
+          <ion-col size="12" class="exit_btn">
+            <div class="sign-up-style">
+              <ion-button fill="clear"  class="delte_btn"
+                > <ion-text class="custom-text">Delete account</ion-text></ion-button
+              >
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>
