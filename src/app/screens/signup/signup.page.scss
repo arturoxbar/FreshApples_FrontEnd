@@ -11,7 +11,7 @@ ion-content {
 
 form {
   background: var(--overlay-color);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 10px;
   max-width: 400px;
   width: 100%;
@@ -37,7 +37,6 @@ ion-label, ion-input {
 }
 
 .login-style ion-button {
-  font-size: 0.9rem;
   --color: var(--secondary-color);
 }
 
@@ -56,3 +55,6 @@ ion-label, ion-input {
   color: white;
 }
 
+.collum2{
+  padding: 1rem;
+}
