@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'movie-detail',
     loadChildren: () => import('./screens/movie-detail/movie-detail.module').then( m => m.MovieDetailPageModule)
   },
+  {
+    path: 'user',
+    loadChildren: () => import('./screens/user/user.module').then( m => m.UserPageModule)
+  },
 
 
 ];
