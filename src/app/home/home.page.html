@@ -1,21 +1,7 @@
 <ion-toolbar color="undefine">
   <ion-grid>
     <ion-row>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-      <ion-col size="3"
-        ><ion-button
-          class="skip"
-          color="viewer_secundary"
-          id="open-toast"
-          size="small"
-          routerLink="/tabs/discover"
-          routerDirection="forward"
-          >skip</ion-button
-        >
+      <ion-col size="3">
         <ion-toast
           trigger="open-toast"
           message="We recommend logging in for the full experience."
@@ -37,7 +23,7 @@
       <ion-button
         class="joinbtn"
         expand="block"
-        color="viewer_secundary"
+        color="danger"
         routerLink="/login"
         routerDirection="forward"
         >Log in</ion-button
@@ -45,7 +31,6 @@
       <ion-button
         class="signupbtn"
         expand="block"
-        color="viewer_secundary"
         routerLink="/signup"
         routerDirection="forward"
         >Signup</ion-button
