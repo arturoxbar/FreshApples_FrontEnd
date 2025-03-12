@@ -1,5 +1,53 @@
 @import '../../../theme/variables.scss';
 
+.no-indicator {
+  --indicator-color: transparent;
+}
+
+.S_cart {
+  background: var(--background-light);
+  border: 1px solid var(--input-border-color);
+  --indicator-color: transparent;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.S_frontpage {
+  border-radius: 5px;
+  width: 150px; /* Tamaño aumentado */
+  height: 225px; /* Proporción 2:3 */
+  object-fit: cover;
+}
+
+.S_page {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  white-space: normal; /* Permite múltiples líneas */
+}
+
+/* Mantenemos los nuevos estilos generales */
+.section-container {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
 /* Header */
 .header-custom {
   background: var(--tertiary-color);
@@ -8,7 +56,6 @@
 .miniAvatar {
   height: 30px;
   width: 30px;
-
 }
 
 .centerheader-col {
@@ -25,69 +72,97 @@
   --background: var(--background-color);
 }
 
-/* Contenedor principal */
-.discover-container {
-  padding: 1rem;
-  color: var(--text-color);
+.trending-filter {
+  margin: 10px 0;
+  
+  ion-segment-button {
+    --color: #666;
+    --color-checked: var(--ion-color-danger);
+    --indicator-color: var(--ion-color-danger);
+    font-size: 0.8em;
+  }
 }
 
-/* Sección Titles */
+/* Secciones */
+.section-container {
+  margin-bottom: 2rem;
+}
+
 .section-title {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--primary-color);
+  margin-left: 1rem;
+  justify-self: center;
 }
 
-/* Botones y segment */
-.S_cart {
+/* Slider */
+.custom-slider {
+  padding: 0 1rem;
+}
+
+// En tu SCSS (general.page.scss)
+.media-card {
   background: var(--background-light);
-  border: 1px solid var(--input-border-color);
+  border-radius: 10px;
   margin: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  height: 350px; /* Altura fija para mantener consistencia */
+  display: flex;
+  flex-direction: column;
 }
 
-.S_frontpage {
-  border-radius: 5px;
-  width: 100px;
-  height: auto;
-}
-
-.S_page {
-  color: var(--text-color);
-  font-size: 0.9rem;
-  --indicator-color: transparent; /* Oculta el indicador */
-}
-
-/* Media Card */
-ion-card {
-  margin-bottom: 1rem;
-  background: var(--background-light);
-  color: var(--text-color);
-}
-
-.media-img {
+.media-poster {
+  border-radius: 10px 10px 0 0;
   width: 100%;
-  border-radius: 5px;
+  height: 200px;
+  object-fit: cover;
+  flex-shrink: 0; /* Evita que la imagen se reduzca */
 }
 
 .media-chip {
-  background: var(--secondary-color);
-  color: var(--text-color);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 0.65rem;
+  padding: 4px 10px;
+  margin: 0;
+  border-radius: 15px;
+  z-index: 2; /* Asegura que esté sobre la imagen */
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.media-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .media-title {
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--text-color);
+  align-self: center;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  display: -webkit-box;
+  overflow: hidden;
 }
 
 .media-overview {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--text-color-muted);
+  text-align: center;
+  margin: 0;
+  overflow: hidden;
+}
+/* Infinite Scroll */
+ion-infinite-scroll {
+  margin-bottom: 2rem;
 }
 
-ion-segment-button.md {
-
-  --color-checked: transparent;
-
-}
