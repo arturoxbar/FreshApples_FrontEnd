@@ -9,11 +9,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { UserService } from './services/user.service';
+import { MoviesService } from './services/movies.service';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, UserService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, UserService, MoviesService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
