@@ -1,0 +1,28 @@
+
+/* Media Card */
+ion-card {
+    margin-bottom: 1rem;
+    background: var(--background-light);
+    color: var(--text-color);
+  }
+  
+  .media-img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .media-chip {
+    background: var(--secondary-color);
+    color: var(--text-color);
+  }
+  
+  .media-title {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  
+  .media-overview {
+    font-size: 0.8rem;
+  }
+

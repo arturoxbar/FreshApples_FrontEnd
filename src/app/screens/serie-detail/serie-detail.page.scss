@@ -1,0 +1,64 @@
+.discover-container {
+    padding: 1rem;
+    color: var(--text-color);
+  }
+
+  .miniAvatar {
+    height: 40px;
+    width: 40px;
+  
+  }
+
+.section-title {
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+ion-card {
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    background: var(--background-light);
+    color: var(--text-color);
+  }
+  
+  .media-img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .media-chip {
+    background: var(--secondary-color);
+    color: var(--text-color);
+  }
+  
+  .media-title {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  
+  .media-overview {
+    font-size: 0.8rem;
+  }
+  
+
+.collum{
+    padding: 1rem;
+    text-align: center;
+  }
+
+  
+.collum2{
+  padding: 1rem;
+}
+  
+
+.apple-img{
+    height: 95%;
+}
+
+.modal_icon{
+    color: white;
+}

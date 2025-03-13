@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-row class="ion-align-items-end">
+      <ion-col  size="1">
+              <ion-button  fill="clear" routerLink="/general" routerDirection="forward"><ion-icon slot="start" color="danger" name="arrow-back" ></ion-icon></ion-button>
+      </ion-col>
+      <ion-col size="11"><ion-searchbar show-clear-button="focus" animated="true" placeholder="search"></ion-searchbar></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [scrollable]="true">
+    <ion-row>
+      <ion-col size="auto">
+              <ion-chip color="danger">    
+              <ion-select
+              aria-label="Food"
+              [compareWith]="compareWith"
+              placeholder="Genender "
+              (ionChange)="handleChange($event)"
+              [multiple]="true"
+            >
+              @for (food of foods; track food) {
+              <ion-select-option [value]="food">{{ food.name }}</ion-select-option>
+              }
+            </ion-select>
+        </ion-chip>
+
+      </ion-col>
+      <ion-col size="auto">
+        <ion-chip color="danger"> 
+          <ion-select
+          aria-label="Food"
+          [compareWith]="compareWith"
+          placeholder="Year "
+          (ionChange)="handleChange($event)"
+          
+        >
+          @for (food of foods; track food) {
+          <ion-select-option [value]="food">{{ food.name }}</ion-select-option>
+          }
+        </ion-select>
+        </ion-chip>   
+      </ion-col>
+      <ion-col size="auto">
+        <ion-chip color="danger"> 
+          <ion-select
+          aria-label="Food"
+          [compareWith]="compareWith"
+          placeholder="Type "
+          (ionChange)="handleChange($event)"
+         
+        >
+          @for (food of foods; track food) {
+          <ion-select-option [value]="food">{{ food.name }}</ion-select-option>
+          }
+        </ion-select> 
+        </ion-chip>  
+      </ion-col>
+      <ion-col size="auto">
+        <ion-chip color="danger"> 
+          <ion-select
+          aria-label="Food"
+          [compareWith]="compareWith"
+          placeholder="State "
+          (ionChange)="handleChange($event)"
+          
+        >
+          @for (food of foods; track food) {
+          <ion-select-option [value]="food">{{ food.name }}</ion-select-option>
+          }
+        </ion-select>
+        </ion-chip>  
+      </ion-col>
+      <ion-col size="auto">
+        <ion-chip color="danger"> 
+          <ion-select
+          aria-label="Food"
+          [compareWith]="compareWith"
+          placeholder="Order "
+          (ionChange)="handleChange($event)"
+         
+        >
+          @for (food of foods; track food) {
+          <ion-select-option [value]="food">{{ food.name }}</ion-select-option>
+          }
+        </ion-select>
+        </ion-chip>  
+      </ion-col>
+    </ion-row>
+  </ion-segment>
+  <ion-card
+  routerLink="/movie-detail" routerDirection="forward"
+  class="ion-activatable ripple-parent"
+>
+  <img alt="media image" src="https://es.web.img3.acsta.net/pictures/14/11/05/11/10/307208.jpg" class="media-img" />
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <ion-chip class="media-chip"> Movie </ion-chip>
+      </ion-col>
+      <ion-col size="auto" class="media-title">
+        QWERTYQWERTY
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card-content class="media-overview">
+    QWERTYQWERTY
+  </ion-card-content>
+  <ion-ripple-effect></ion-ripple-effect>
+</ion-card>
+</ion-content>
