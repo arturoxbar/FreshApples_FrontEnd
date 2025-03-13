@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./screens/user/user.module').then( m => m.UserPageModule)
   },
+  {
+    path: 'serie-detail',
+    loadChildren: () => import('./screens/serie-detail/serie-detail.module').then( m => m.SerieDetailPageModule)
+  },
+    {
+    path: 'search',
+    loadChildren: () => import('./screens/search/search.module').then( m => m.SearchPageModule)
+  },
 
 
 ];
