@@ -62,3 +62,38 @@ ion-card {
 .modal_icon{
     color: white;
 }
+
+
+.score-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.score-buttons button {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.score-buttons button:hover {
+  background: #b0bec5;
+}
+
+.score-buttons button.selected {
+  background: #007aff;
+  color: white;
+  transform: scale(1.1);
+}
+
+.semi-transparent-background {
+  --background: rgba(0, 0, 0, 0.7); /* Fondo blanco semi-transparente */
+}
